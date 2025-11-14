@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import quest.model.Livre;
-import quest.service.LivreService;
-import quest.view.Views;
+import fr.formation.model.Livre;
+import fr.formation.service.LivreService;
 
 @RestController
 @RequestMapping("/api/livre")

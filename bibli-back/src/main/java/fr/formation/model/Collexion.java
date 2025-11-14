@@ -1,5 +1,6 @@
 package fr.formation.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ public class Collexion {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-    
+    @Column(length = 50,nullable = false)
     private String nom;
 
     public Collexion() {}

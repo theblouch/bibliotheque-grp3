@@ -2,8 +2,8 @@ package fr.formation.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import quest.model.Livre;
+import fr.formation.model.Livre;
 
-public interface IDAOModule extends JpaRepository<Livre, Integer> {
+public interface IDAOLivre extends JpaRepository<Livre, Integer> {
 
 }

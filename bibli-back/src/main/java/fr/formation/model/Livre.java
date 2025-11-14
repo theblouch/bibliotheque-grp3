@@ -1,5 +1,12 @@
 package fr.formation.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "Livre")
 public class Livre {
@@ -14,16 +21,13 @@ public class Livre {
     @Column(length = 1000)
     private String résumé;
 
-    @ManyToOne
     private Collexion collexion;
 
     @Column(length = 5)
     private int année;
-
-    @ManyToOne
+    
     private Auteur auteur;
-
-    @ManyToOne
+    
     private Editeur editeur;
 
     public Livre() {
@@ -45,7 +49,7 @@ public class Livre {
         this.résumé = résumé;
     }
 
-    public collexion getCollexion() {
+    public Collexion getCollexion() {
         return this.collexion;
     }
 
@@ -76,8 +80,18 @@ public class Livre {
     public void setEditeur(Editeur editeur) {
         this.editeur = editeur;
     }
+    
+    
 
-    @Override
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +

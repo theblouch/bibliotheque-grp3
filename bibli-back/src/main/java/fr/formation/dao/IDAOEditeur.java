@@ -1,7 +1,9 @@
 package fr.formation.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import fr.formation.model.Editeur;
 
-public class IDAOEditeur extends JpaRepository<Editeur, Integer> {
+public interface IDAOEditeur extends JpaRepository<Editeur, Integer> {
 
 }

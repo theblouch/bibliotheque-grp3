@@ -1,13 +1,12 @@
-package quest.service;
+package fr.formation.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import quest.dao.IDAOLivre;
-import quest.model.Livre;
+import fr.formation.dao.IDAOLivre;
+import fr.formation.model.Livre;
 
 @Service
 public class LivreService {
