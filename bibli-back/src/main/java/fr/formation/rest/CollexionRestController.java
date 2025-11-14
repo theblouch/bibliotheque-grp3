@@ -1,0 +1,58 @@
+package fr.formation.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import fr.formation.model.Collexion;
+import fr.formation.service.CollexionService;
+
+@RestController
+public class CollexionRestController {
+
+    @Autowired
+    CollexionService collexionSrv;
+
+    @GetMapping
+	public List<Collexion> allCollexions()
+	{
+		return collexionSrv.getAll();
+	}
+
+	@GetMapping("/{id}")
+	public Collexion ficheCollexion(@PathVariable Integer id, Collexion collexion) {
+		return collexionSrv.getById(id);
+	}
+
+	@PostMapping
+	public Collexion ajoutCollexion(@RequestBody Collexion collexion)
+	{
+		return collexionSrv.create(collexion);
+	}
+
+	
+	@PutMapping("/{id}")
+	public Collexion modifierCollexion(@PathVariable String nom,@RequestBody Collexion collexion)
+	{
+		collexion.setNom(nom);
+		return (Collexion) collexionSrv.update(collexion);
+	}
+
+
+	@DeleteMapping("/{id}")
+	public void supprimerCollexion(@PathVariable Integer id) {
+		collexionSrv.deleteById(id);
+	}
+
+
+
+}
