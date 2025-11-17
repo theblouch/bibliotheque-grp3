@@ -18,7 +18,7 @@ import fr.formation.service.AuteurService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/auteur")
+@RequestMapping("/api/auteur")
 public class AuteurRestController {
 
     @Autowired

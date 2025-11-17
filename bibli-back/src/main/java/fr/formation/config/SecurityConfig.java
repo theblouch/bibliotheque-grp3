@@ -36,7 +36,7 @@ public class SecurityConfig {
 
         http.httpBasic(Customizer.withDefaults());
 
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/**"));
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
 
         http.cors(cors -> {
             CorsConfigurationSource source = request -> {

@@ -18,7 +18,7 @@ import fr.formation.service.CollexionService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/collexion")
+@RequestMapping("/api/collexion")
 public class CollexionRestController {
 
 	@Autowired

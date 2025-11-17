@@ -18,7 +18,7 @@ import fr.formation.service.EditeurService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/editeur")
+@RequestMapping("/api/editeur")
 public class EditeurRestController {
 
 	@Autowired

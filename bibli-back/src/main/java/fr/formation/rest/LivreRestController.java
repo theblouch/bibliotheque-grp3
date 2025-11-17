@@ -18,7 +18,7 @@ import fr.formation.service.LivreService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/livre")
+@RequestMapping("/api/livre")
 public class LivreRestController {
 
     @Autowired
