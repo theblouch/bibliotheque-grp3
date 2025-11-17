@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.formation.dao.IDAOEditeur;
 import fr.formation.model.Editeur;
-
+@Service
 public class EditeurService {
 	@Autowired
 	IDAOEditeur daoEditeur;

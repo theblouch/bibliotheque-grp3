@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.formation.dao.IDAOCollexion;
 import fr.formation.model.Collexion;
 
+@Service
 public class CollexionService {
 
     @Autowired

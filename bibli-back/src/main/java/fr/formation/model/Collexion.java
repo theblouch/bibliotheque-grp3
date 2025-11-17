@@ -1,8 +1,11 @@
 package fr.formation.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
@@ -15,6 +18,9 @@ public class Collexion {
 	private Integer id;
     @Column(length = 50,nullable = false)
     private String nom;
+
+    @OneToMany (mappedBy="collexion")
+	private List<Livre> livres;
 
     public Collexion() {}
 

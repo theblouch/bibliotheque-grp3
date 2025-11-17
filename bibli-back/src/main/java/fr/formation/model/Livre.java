@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,14 +21,17 @@ public class Livre {
 
     @Column(length = 1000)
     private String résumé;
-
+    
+    @ManyToOne
     private Collexion collexion;
 
     @Column(length = 5)
     private int année;
     
+    @ManyToOne
     private Auteur auteur;
     
+    @ManyToOne
     private Editeur editeur;
 
     public Livre() {
