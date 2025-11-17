@@ -1,23 +1,88 @@
 package fr.formation.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+    @Bean 
+    SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtFilter) throws Exception {
+        http.authorizeHttpRequests(auth -> {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable()) // désactive CSRF pour éviter les erreurs avec Angular
-                .cors(Customizer.withDefaults()) // active CORS dans la chaîne Security
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // autorise toutes les requêtes (à ajuster si besoin)
-                );
+            auth.requestMatchers(HttpMethod.POST, "/api/utilisateur", "/api/utilisateur/connexion").permitAll();
+
+            auth.requestMatchers("/**").authenticated();
+        });
+
+        http.formLogin(Customizer.withDefaults());
+
+        http.httpBasic(Customizer.withDefaults());
+
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/**"));
+
+        http.cors(cors -> {
+            CorsConfigurationSource source = request -> {
+                CorsConfiguration config = new CorsConfiguration();
+
+                // On autorise toutes les en-têtes HTTP, toutes les méthodes HTTP de tous les domaines
+                config.setAllowedHeaders(List.of("*"));
+                config.setAllowedMethods(List.of("*"));
+                config.setAllowedOrigins(List.of("*"));
+
+                return config;
+            };
+
+            cors.configurationSource(source);
+        });
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+   /* UserDetailsService inMemory(PasswordEncoder passwordEncoder) {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+
+        manager.createUser(User
+            .withUsername("user")
+            .password(passwordEncoder.encode("123456"))
+            .roles("USER")
+            .build()
+        );
+
+        return manager;
+    }*/
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("123456") + "\r\n");
+
+        return passwordEncoder;
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }
