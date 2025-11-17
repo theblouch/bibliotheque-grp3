@@ -1,0 +1,65 @@
+<h1>Liste des auteurs</h1>
+
+<form (ngSubmit)="creerOuModifier()" [formGroup]="auteurForm">
+    <div>
+        <input type="text" formControlName="nom" />
+
+        @if (nomCtrl.hasError('required')) {
+        <span>Le nom est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="prenom" />
+
+        @if (prenomCtrl.hasError('required')) {
+        <span>Le prenom est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="nationalite" />
+
+        @if (nationaliteCtrl.hasError('required')) {
+        <span>La nationalite est obligatoire</span>
+        }
+    </div>
+
+    @if (editingAuteur) {
+    <input type="submit" [disabled]="auteurForm.invalid" value="Modifier" />
+    }
+
+    @else {
+    <input type="submit" [disabled]="auteurForm.invalid" value="Créer" />
+    }
+</form>
+
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Nationalité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let auteur of auteurs$ | async; trackBy: trackAuteur">
+            <td>
+                <a [routerLink]="[ '/auteur', auteur.id ]">{{ auteur.nom }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/auteur', auteur.id ]">{{ auteur.prenom }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/auteur', auteur.id ]">{{ auteur.nationalite }}</a>
+            </td>
+
+            <td>
+                <button (click)="editer(auteur)">Modifier</button>
+                <button (click)="supprimer(auteur)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
