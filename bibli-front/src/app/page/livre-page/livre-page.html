@@ -1,18 +1,91 @@
 <h1>Liste des Livres </h1>
 
+<form (ngSubmit)="creerOuModifier()" [formGroup]="livreForm">
+    <div>
+        <input type="text" formControlName="titre" />
+
+        @if (titreCtrl.hasError('required')) {
+        <span>Le titre est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="résumé" />
+
+        @if (resumeCtrl.hasError('required')) {
+        <span>Le résumé est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="collexion" />
+
+        @if (collexionCtrl.hasError('required')) {
+        <span>La nationalite est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="annee" />
+
+        @if (anneeCtrl.hasError('required')) {
+        <span>L'année est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="livre" />
+
+        @if (auteurCtrl.hasError('required')) {
+        <span>L'auteur est obligatoire</span>
+        }
+    </div>
+    <div>
+        <input type="text" formControlName="editeur" />
+
+        @if (editeurCtrl.hasError('required')) {
+        <span>L'editeur est obligatoire</span>
+        }
+    </div>
+
+    @if (editingLivre) {
+    <input type="submit" [disabled]="livreForm.invalid" value="Modifier" />
+    }
+
+    @else {
+    <input type="submit" [disabled]="livreForm.invalid" value="Créer" />
+    }
+</form>
+
+<hr />
 
 <table>
     <thead>
         <tr>
             <th>Titre</th>
-            <th></th>
+            <th>Résumé</th>
+            <th>Collection</th>
+            <th>Année</th>
+            <th>Auteur</th>
+            <th>Editeur</th>
         </tr>
     </thead>
 
     <tbody>
         <tr *ngFor="let livre of livres$ | async; trackBy: trackLivre">
             <td>
-                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.titre }}</a>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.titre}}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.resume }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.collexion }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.annee }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.auteur }}</a>
+            </td>
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.editeur }}</a>
             </td>
 
             <td>

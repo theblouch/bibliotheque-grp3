@@ -20,17 +20,17 @@ public class Livre {
     private String titre;
 
     @Column(length = 1000)
-    private String résumé;
-    
+    private String resume;
+
     @ManyToOne
     private Collexion collexion;
 
     @Column(length = 5)
-    private int année;
-    
+    private int annee;
+
     @ManyToOne
     private Auteur auteur;
-    
+
     @ManyToOne
     private Editeur editeur;
 
@@ -84,18 +84,16 @@ public class Livre {
     public void setEditeur(Editeur editeur) {
         this.editeur = editeur;
     }
-    
-    
 
     public Integer getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +

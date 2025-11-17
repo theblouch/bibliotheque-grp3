@@ -18,9 +18,9 @@ export class LivrePage implements OnInit {
 
   protected idCtrl!: FormControl;
   protected titreCtrl!: FormControl;
-  protected résuméCtrl!: FormControl;
+  protected resumeCtrl!: FormControl;
   protected collexionCtrl!: FormControl;
-  protected annéeCtrl!: FormControl;
+  protected anneeCtrl!: FormControl;
   protected auteurCtrl!: FormControl;
   protected editeurCtrl!: FormControl;
 
@@ -33,18 +33,18 @@ export class LivrePage implements OnInit {
     this.livres$ = this.livreService.findAll();
 
     this.idCtrl = this.formBuilder.control('', Validators.required);
-    this.résuméCtrl = this.formBuilder.control('', Validators.required);
+    this.resumeCtrl = this.formBuilder.control('', Validators.required);
     this.collexionCtrl = this.formBuilder.control('', Validators.required);
-    this.annéeCtrl = this.formBuilder.control('', Validators.required);
+    this.anneeCtrl = this.formBuilder.control('', Validators.required);
     this.auteurCtrl = this.formBuilder.control('', Validators.required);
     this.editeurCtrl = this.formBuilder.control('', Validators.required);
 
     this.livreForm = this.formBuilder.group({
       id: this.idCtrl,
       titre: this.titreCtrl,
-      résumé: this.résuméCtrl,
+      resume: this.resumeCtrl,
       collexion: this.collexionCtrl,
-      année: this.annéeCtrl,
+      annee: this.anneeCtrl,
       auteur: this.auteurCtrl,
       editeur: this.editeurCtrl,
     });
@@ -56,16 +56,16 @@ export class LivrePage implements OnInit {
 
   public creerOuModifier() {
     if (this.editingLivre) {
-      this.livreService.save(new LivreDto(this.editingLivre.id, this.editingLivre.titre, this.editingLivre.résumé, this.editingLivre.année, this.editingLivre.auteur, this.editingLivre.editeur, this.editingLivre.collexion));
+      this.livreService.save(new LivreDto(this.editingLivre.id, this.editingLivre.titre, this.editingLivre.resume, this.editingLivre.annee, this.editingLivre.auteur, this.editingLivre.editeur, this.editingLivre.collexion));
     }
     else {
-      this.livreService.save(new LivreDto(0, this.titreCtrl.value, this.résuméCtrl.value, this.annéeCtrl.value, this.auteurCtrl.value, this.editeurCtrl.value, this.collexionCtrl.value));
+      this.livreService.save(new LivreDto(0, this.titreCtrl.value, this.resumeCtrl.value, this.anneeCtrl.value, this.auteurCtrl.value, this.editeurCtrl.value, this.collexionCtrl.value));
     }
 
     this.editingLivre = null;
     this.titreCtrl.setValue("");
-    this.résuméCtrl.setValue("");
-    this.annéeCtrl.setValue("");
+    this.resumeCtrl.setValue("");
+    this.anneeCtrl.setValue("");
     this.auteurCtrl.setValue("");
     this.editeurCtrl.setValue("");
     this.collexionCtrl.setValue("");
@@ -74,8 +74,8 @@ export class LivrePage implements OnInit {
   public editer(livre: LivreDto) {
     this.editingLivre = livre;
     this.titreCtrl.setValue(livre.titre);
-    this.résuméCtrl.setValue(livre.résumé);
-    this.annéeCtrl.setValue(livre.année);
+    this.resumeCtrl.setValue(livre.resume);
+    this.anneeCtrl.setValue(livre.annee);
     this.auteurCtrl.setValue(livre.auteur);
     this.editeurCtrl.setValue(livre.editeur);
     this.collexionCtrl.setValue(livre.collexion);

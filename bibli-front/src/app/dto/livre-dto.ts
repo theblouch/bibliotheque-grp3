@@ -3,7 +3,7 @@ import { CollexionDto } from "./collexion-dto";
 import { EditeurDto } from "./editeur-dto";
 
 export class LivreDto {
-    constructor(private _id: number, private _titre: string, private _résumé: string, private _année: number, private _auteur: AuteurDto, private _editeur: EditeurDto, private _collexion: CollexionDto) { }
+    constructor(private _id: number, private _titre: string, private _resume: string, private _annee: number, private _auteur: AuteurDto, private _editeur: EditeurDto, private _collexion: CollexionDto) { }
 
     public get id(): number {
         return this._id;
@@ -22,20 +22,20 @@ export class LivreDto {
     }
 
 
-    public get résumé(): string {
-        return this._résumé;
+    public get resume(): string {
+        return this._resume;
     }
 
-    public set résumé(value: string) {
-        this._résumé = value;
+    public set resume(value: string) {
+        this._resume = value;
     }
 
-    public get année(): number {
-        return this._année;
+    public get annee(): number {
+        return this._annee;
     }
 
-    public set année(value: number) {
-        this._année = value;
+    public set annee(value: number) {
+        this._annee = value;
     }
 
     public get auteur(): AuteurDto {
@@ -63,8 +63,8 @@ export class LivreDto {
     public toJson(): any {
         return {
             titre: this._titre,
-            résumé: this._résumé,
-            année: this._année,
+            résumé: this._resume,
+            année: this._annee,
             auteur: this._auteur,
             editeur: this._editeur,
             collexion: this._collexion
