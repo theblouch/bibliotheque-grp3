@@ -6,7 +6,11 @@ import { LivrePage } from './page/livre-page/livre-page';
 
 export const routes: Routes = [
     { path: 'livre', component: LivrePage },
+    { path: 'livre/:id', component: LivrePage },
     { path: 'auteur', component: AuteurPage },
+    { path: 'auteur/:id', component: AuteurPage },
     { path: 'editeur', component: Editeur },
-    { path: 'collexion', component: Collexion }
+    { path: 'editeur/:id', component: Editeur },
+    { path: 'collexion', component: Collexion },
+    { path: 'collexion/:id', component: Collexion }
 ];

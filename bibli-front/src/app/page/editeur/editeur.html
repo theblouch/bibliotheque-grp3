@@ -41,6 +41,8 @@
         <tr *ngFor="let editeur of editeurs$ | async; trackBy: trackEditeur">
             <td>
                 <a [routerLink]="[ '/editeur', editeur.id ]">{{ editeur.nom }}</a>
+            </td>
+            <td>
                 <a [routerLink]="[ '/editeur', editeur.id ]">{{ editeur.pays }}</a>
             </td>
 
