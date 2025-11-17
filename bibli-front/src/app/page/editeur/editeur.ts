@@ -27,6 +27,7 @@ export class Editeur implements OnInit {
     this.editeurs$ = this.editeurService.findAll();
 
     this.nomCtrl = this.formBuilder.control('', Validators.required);
+    this.paysCtrl = this.formBuilder.control('', Validators.required);
 
     this.editeurForm = this.formBuilder.group({
       nom: this.nomCtrl,
