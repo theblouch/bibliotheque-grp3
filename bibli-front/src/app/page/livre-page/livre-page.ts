@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LivreDto } from '../../dto/livre-dto';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LivreService } from '../../service/livre-service';
+import { AuteurService } from '../../service/auteur-service';
+import { EditeurService } from '../../service/editeur-service';
+import { CollexionService } from '../../service/collexion-service';
+import { AuteurDto } from '../../dto/auteur-dto';
+import { CollexionDto } from '../../dto/collexion-dto';
+import { EditeurDto } from '../../dto/editeur-dto';
 
 @Component({
   selector: 'app-livre-page',
@@ -15,8 +21,10 @@ import { LivreService } from '../../service/livre-service';
 export class LivrePage implements OnInit {
   protected livres$!: Observable<LivreDto[]>;
   protected livreForm!: FormGroup;
+  protected auteurs: AuteurDto[] = [];
+  protected collexions: CollexionDto[] = [];
+  protected editeurs: EditeurDto[] = [];
 
-  protected idCtrl!: FormControl;
   protected titreCtrl!: FormControl;
   protected resumeCtrl!: FormControl;
   protected collexionCtrl!: FormControl;
@@ -27,12 +35,14 @@ export class LivrePage implements OnInit {
 
   protected editingLivre!: LivreDto | null;
 
-  constructor(private livreService: LivreService, private formBuilder: FormBuilder) { }
+
+
+  constructor(private livreService: LivreService, private formAuteur: FormBuilder, private formBuilder: FormBuilder, private auteurService: AuteurService, private editeurService: EditeurService, private collexionService: CollexionService) { }
 
   ngOnInit(): void {
     this.livres$ = this.livreService.findAll();
 
-    this.idCtrl = this.formBuilder.control('', Validators.required);
+    this.titreCtrl = this.formBuilder.control('', Validators.required);
     this.resumeCtrl = this.formBuilder.control('', Validators.required);
     this.collexionCtrl = this.formBuilder.control('', Validators.required);
     this.anneeCtrl = this.formBuilder.control('', Validators.required);
@@ -40,13 +50,24 @@ export class LivrePage implements OnInit {
     this.editeurCtrl = this.formBuilder.control('', Validators.required);
 
     this.livreForm = this.formBuilder.group({
-      id: this.idCtrl,
       titre: this.titreCtrl,
       resume: this.resumeCtrl,
       collexion: this.collexionCtrl,
       annee: this.anneeCtrl,
       auteur: this.auteurCtrl,
       editeur: this.editeurCtrl,
+    });
+
+    this.auteurService.findAll().subscribe(auteurs => {
+      this.auteurs = auteurs;
+    });
+
+    this.collexionService.findAll().subscribe(collexions => {
+      this.collexions = collexions;
+    });
+
+    this.editeurService.findAll().subscribe(editeurs => {
+      this.editeurs = editeurs;
     });
   }
 

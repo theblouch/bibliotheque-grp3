@@ -9,17 +9,22 @@
         }
     </div>
     <div>
-        <input type="text" formControlName="résumé" />
+        <input type="text" formControlName="resume" />
 
         @if (resumeCtrl.hasError('required')) {
         <span>Le résumé est obligatoire</span>
         }
     </div>
     <div>
-        <input type="text" formControlName="collexion" />
+        <select formControlName="collexion">
+            <option value="" disabled selected>Choisir une collection</option>
+            <option *ngFor="let collexion of collexions" [ngValue]="collexion.id">
+                {{ collexion.nom }}
+            </option>
+        </select>
 
         @if (collexionCtrl.hasError('required')) {
-        <span>La nationalite est obligatoire</span>
+        <span>La collection est obligatoire</span>
         }
     </div>
     <div>
@@ -30,15 +35,23 @@
         }
     </div>
     <div>
-        <input type="text" formControlName="livre" />
-
+        <select formControlName="auteur">
+            <option value="" disabled selected>Choisir un auteur</option>
+            <option *ngFor="let auteur of auteurs" [ngValue]="auteur.id">
+                {{ auteur.nom }} {{ auteur.prenom }}
+            </option>
+        </select>
         @if (auteurCtrl.hasError('required')) {
         <span>L'auteur est obligatoire</span>
         }
     </div>
     <div>
-        <input type="text" formControlName="editeur" />
-
+        <select formControlName="editeur">
+            <option value="" disabled selected>Choisir un éditeur</option>
+            <option *ngFor="let editeur of editeurs" [ngValue]="editeur.id">
+                {{ editeur.nom }} - {{ editeur.pays }}
+            </option>
+        </select>
         @if (editeurCtrl.hasError('required')) {
         <span>L'editeur est obligatoire</span>
         }
@@ -76,16 +89,16 @@
                 <a [routerLink]="[ '/livre', livre.id ]">{{ livre.resume }}</a>
             </td>
             <td>
-                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.collexion }}</a>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.collexion.nom }}</a>
             </td>
             <td>
                 <a [routerLink]="[ '/livre', livre.id ]">{{ livre.annee }}</a>
             </td>
             <td>
-                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.auteur }}</a>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.auteur.nom }} {{ livre.auteur.prenom }}</a>
             </td>
             <td>
-                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.editeur }}</a>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.editeur.nom }}</a>
             </td>
 
             <td>

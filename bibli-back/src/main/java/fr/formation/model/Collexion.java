@@ -11,18 +11,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="collexion")
+@Table(name = "collexion")
 public class Collexion {
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-    @Column(length = 50,nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(length = 50, nullable = false)
     private String nom;
 
-    @OneToMany (mappedBy="collexion")
-	private List<Livre> livres;
+    @OneToMany(mappedBy = "collexion")
+    private List<Livre> livres;
 
-    public Collexion() {}
+    public Collexion() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;
@@ -40,7 +49,5 @@ public class Collexion {
     public String toString() {
         return "Collexion [nom=" + nom + "]";
     }
-
-    
 
 }

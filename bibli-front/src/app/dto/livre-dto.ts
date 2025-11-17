@@ -63,11 +63,13 @@ export class LivreDto {
     public toJson(): any {
         return {
             titre: this._titre,
-            résumé: this._resume,
-            année: this._annee,
-            auteur: this._auteur,
-            editeur: this._editeur,
-            collexion: this._collexion
+            resume: this._resume,
+            annee: this._annee,
+            auteur: {
+                id: this._auteur
+            },
+            editeur: { id: this._editeur },
+            collexion: { id: this._collexion }
         };
     }
 }

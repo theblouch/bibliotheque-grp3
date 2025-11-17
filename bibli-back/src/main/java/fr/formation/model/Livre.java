@@ -45,12 +45,12 @@ public class Livre {
         this.titre = titre;
     }
 
-    public String getRésumé() {
-        return this.résumé;
+    public String getResume() {
+        return this.resume;
     }
 
-    public void setRésumé(String résumé) {
-        this.résumé = résumé;
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 
     public Collexion getCollexion() {
@@ -61,12 +61,12 @@ public class Livre {
         this.collexion = collexion;
     }
 
-    public int getAnnée() {
-        return this.année;
+    public int getAnnee() {
+        return this.annee;
     }
 
-    public void setAnnée(int année) {
-        this.année = année;
+    public void setAnnee(int annee) {
+        this.annee = annee;
     }
 
     public Auteur getAuteur() {
@@ -98,9 +98,9 @@ public class Livre {
         return "{" +
                 " id='" + getId() + "'" +
                 ", titre='" + getTitre() + "'" +
-                ", résumé='" + getRésumé() + "'" +
+                ", resume='" + getResume() + "'" +
                 ", collexion='" + getCollexion() + "'" +
-                ", année='" + getAnnée() + "'" +
+                ", annee='" + getAnnee() + "'" +
                 ", auteur='" + getAuteur() + "'" +
                 ", editeur='" + getEditeur() + "'" +
                 "}";
