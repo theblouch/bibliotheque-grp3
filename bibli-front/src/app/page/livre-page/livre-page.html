@@ -1,0 +1,24 @@
+<h1>Liste des Livres </h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Libellé</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let livre of livres$ | async; trackBy: trackMatiere">
+            <td>
+                <a [routerLink]="[ '/livre', livre.id ]">{{ livre.titre }}</a>
+            </td>
+
+            <td>
+                <button (click)="editer(livre)">Modifier</button>
+                <button (click)="supprimer(livre)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
