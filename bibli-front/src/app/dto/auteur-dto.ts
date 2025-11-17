@@ -27,11 +27,11 @@ export class AuteurDto {
     }
 
     public get nationalite(): string {
-        return this._nom;
+        return this._nationalite;
     }
 
     public set nationalite(value: string) {
-        this._nom = value;
+        this._nationalite = value;
     }
 
     public toJson(): any {

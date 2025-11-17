@@ -1,4 +1,4 @@
-import { CollexionDto } from './collexion.dto';
+import { CollexionDto } from './collexion-dto';
 
 describe('CollexionDto', () => {
   it('should create an instance', () => {

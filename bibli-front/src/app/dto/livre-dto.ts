@@ -1,5 +1,9 @@
+import { AuteurDto } from "./auteur-dto";
+import { CollexionDto } from "./collexion-dto";
+import { EditeurDto } from "./editeur-dto";
+
 export class LivreDto {
-    constructor(private _id: number, private _titre: string, private _résumé: string, private _année: number, private _auteur: Auteur, private _editeur: Editeur, private _collexion: Collexion) { }
+    constructor(private _id: number, private _titre: string, private _résumé: string, private _année: number, private _auteur: AuteurDto, private _editeur: EditeurDto, private _collexion: CollexionDto) { }
 
     public get id(): number {
         return this._id;
@@ -34,31 +38,36 @@ export class LivreDto {
         this._année = value;
     }
 
-    public get auteur(): Auteur {
+    public get auteur(): AuteurDto {
         return this._auteur;
     }
 
-    public set auteur(value: Auteur) {
+    public set auteur(value: AuteurDto) {
         this._auteur = value;
     }
 
-    public get editeur(): Editeur {
+    public get editeur(): EditeurDto {
         return this._editeur;
     }
 
-    public set editeur(value: Editeur) {
+    public set editeur(value: EditeurDto) {
         this._editeur = value;
     }
-    public get collexion(): Collexion {
+    public get collexion(): CollexionDto {
         return this._collexion;
     }
-    public set collexion(value: Collexion) {
+    public set collexion(value: CollexionDto) {
         this._collexion = value;
     }
 
     public toJson(): any {
         return {
-            libelle: this._titre
+            titre: this._titre,
+            résumé: this._résumé,
+            année: this._année,
+            auteur: this._auteur,
+            editeur: this._editeur,
+            collexion: this._collexion
         };
     }
 }

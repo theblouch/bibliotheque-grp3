@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CollexionDto } from '../../dto/collexion.dto';
+import { CollexionDto } from '../../dto/collexion-dto';
 import { Observable } from 'rxjs';
 import {
   FormBuilder,
@@ -10,10 +10,11 @@ import {
 } from '@angular/forms';
 import { CollexionService } from '../../service/collexion-service';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-collexion',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './collexion.html',
   styleUrl: './collexion.css',
 })
@@ -23,7 +24,7 @@ export class Collexion implements OnInit {
   protected nomCtrl!: FormControl;
   protected editingCollexion!: CollexionDto | null;
 
-  constructor(private collexionService: CollexionService, private formBuilder: FormBuilder) {}
+  constructor(private collexionService: CollexionService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.collexions$ = this.collexionService.findAll();

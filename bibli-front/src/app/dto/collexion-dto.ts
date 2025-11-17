@@ -1,5 +1,5 @@
 export class CollexionDto {
-  constructor(private _id: number, private _nom: string) {}
+  constructor(private _id: number, private _nom: string) { }
 
   public get id(): number {
     return this._id;
@@ -10,16 +10,16 @@ export class CollexionDto {
   }
 
   public get nom(): string {
-    return this.nom;
+    return this._nom;
   }
 
   public set nom(value: string) {
-    this.nom = value;
+    this._nom = value;
   }
 
   public toJson(): any {
     return {
-      nom: this.nom,
+      nom: this._nom,
     };
   }
 }

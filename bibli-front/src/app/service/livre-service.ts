@@ -7,7 +7,7 @@ import { Observable, startWith, Subject, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class LivreService {
-  private apiUrl: string = '/livre';
+  private apiUrl: string = 'http://localhost:8080/livre';
   private refresh$: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) { }
@@ -49,4 +49,4 @@ export class LivreService {
   }
 }
 
-}
+

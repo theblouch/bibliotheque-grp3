@@ -3,6 +3,7 @@ package fr.formation.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,21 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 import fr.formation.model.Collexion;
 import fr.formation.service.CollexionService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/collexion")
+@RequestMapping("/collexion")
 public class CollexionRestController {
 
-    @Autowired
-    CollexionService collexionSrv;
+	@Autowired
+	CollexionService collexionSrv;
 
-    @GetMapping
-	public List<Collexion> allCollexions()
-	{
+	@GetMapping
+	public List<Collexion> allCollexions() {
 		return collexionSrv.getAll();
 	}
 
@@ -36,25 +35,19 @@ public class CollexionRestController {
 	}
 
 	@PostMapping
-	public Collexion ajoutCollexion(@RequestBody Collexion collexion)
-	{
+	public Collexion ajoutCollexion(@RequestBody Collexion collexion) {
 		return collexionSrv.create(collexion);
 	}
 
-	
 	@PutMapping("/{id}")
-	public Collexion modifierCollexion(@PathVariable String nom,@RequestBody Collexion collexion)
-	{
+	public Collexion modifierCollexion(@PathVariable String nom, @RequestBody Collexion collexion) {
 		collexion.setNom(nom);
 		return (Collexion) collexionSrv.update(collexion);
 	}
-
 
 	@DeleteMapping("/{id}")
 	public void supprimerCollexion(@PathVariable Integer id) {
 		collexionSrv.deleteById(id);
 	}
-
-
 
 }

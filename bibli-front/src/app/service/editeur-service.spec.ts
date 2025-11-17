@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Editeur } from './editeur';
+import { Editeur } from './editeur-service';
 
 describe('Editeur', () => {
   let service: Editeur;

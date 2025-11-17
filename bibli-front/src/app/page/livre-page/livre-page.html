@@ -4,13 +4,13 @@
 <table>
     <thead>
         <tr>
-            <th>Libellé</th>
+            <th>Titre</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
-        <tr *ngFor="let livre of livres$ | async; trackBy: trackMatiere">
+        <tr *ngFor="let livre of livres$ | async; trackBy: trackLivre">
             <td>
                 <a [routerLink]="[ '/livre', livre.id ]">{{ livre.titre }}</a>
             </td>

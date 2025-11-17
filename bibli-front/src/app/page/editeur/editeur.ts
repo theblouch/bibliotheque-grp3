@@ -1,56 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EditeurDto } from '../../../dto/matiere-dto';
-import { EditeurService } from '../../../service/matiere-service';
+
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EditeurDto } from '../../dto/editeur-dto';
+import { EditeurService } from '../../service/editeur-service';
 
 
 @Component({
-  selector: 'app-matiere',
-  imports: [ CommonModule, RouterLink, ReactiveFormsModule ],
-  templateUrl: './matiere.html',
-  styleUrl: './matiere.css',
+  selector: 'app-editeur',
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  templateUrl: './editeur.html',
+  styleUrl: './editeur.css',
 })
 export class Editeur implements OnInit {
-  protected matieres$!: Observable<EditeurDto[]>;
-  protected matiereForm!: FormGroup;
-  protected labelCtrl!: FormControl;
-  protected editingMatiere!: EditeurDto | null;
+  protected editeurs$!: Observable<EditeurDto[]>;
+  protected editeurForm!: FormGroup;
+  protected nomCtrl!: FormControl;
+  protected paysCtrl!: FormControl;
+  protected editingEditeur!: EditeurDto | null;
 
-  constructor(private matiereService: EditeurService, private formBuilder: FormBuilder) { }
+  constructor(private editeurService: EditeurService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.editeurs$ = this.editeurService.findAll();
 
-    this.labelCtrl = this.formBuilder.control('', Validators.required);
+    this.nomCtrl = this.formBuilder.control('', Validators.required);
 
     this.editeurForm = this.formBuilder.group({
-      label: this.labelCtrl
+      nom: this.nomCtrl,
+      pays: this.paysCtrl
     });
   }
 
-  public trackMatiere(index: number, value: EditeurDto) {
+  public trackEditeur(index: number, value: EditeurDto) {
     return value.id;
   }
 
   public creerOuModifier() {
     if (this.editingEditeur) {
-      this.EditeurService.save(new EditeurDto(this.editingEditeur.id, this.labelCtrl.value));
+      this.editeurService.save(new EditeurDto(this.editingEditeur.id, this.nomCtrl.value, this.paysCtrl.value));
     }
 
     else {
-      this.editeurService.save(new EditeurDto(0, this.labelCtrl.value));
+      this.editeurService.save(new EditeurDto(0, this.nomCtrl.value, this.paysCtrl.value));
     }
 
-    this.editingMatiere = null;
-    this.labelCtrl.setValue("");
+    this.editingEditeur = null;
+    this.nomCtrl.setValue("");
+    this.paysCtrl.setValue("");
   }
 
-  public editer(matiere: EditeurDto) {
+  public editer(editeur: EditeurDto) {
     this.editingEditeur = editeur;
-    this.labelCtrl.setValue(editeur.libelle);
+    this.nomCtrl.setValue(editeur.nom);
+    this.paysCtrl.setValue(editeur.pays);
   }
 
   public supprimer(editeur: EditeurDto) {

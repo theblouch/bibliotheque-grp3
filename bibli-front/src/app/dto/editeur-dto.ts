@@ -1,5 +1,5 @@
-export class Editeur {
-    constructor(private _id: number, private _nom: string, private_pays: string) { }
+export class EditeurDto {
+    constructor(private _id: number, private _nom: string, private _pays: string) { }
 
     public get id(): number {
         return this._id;
@@ -27,7 +27,8 @@ export class Editeur {
 
     public toJson(): any {
         return {
-            nom: this.nom
+            nom: this._nom,
+            pays: this._pays
         };
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CollexionDto } from '../dto/collexion.dto';
+import { CollexionDto } from '../dto/collexion-dto';
 import { HttpClient } from '@angular/common/http';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
 
@@ -7,18 +7,15 @@ import { Observable, startWith, Subject, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class CollexionService {
-  private apiUrl: string = '/collexion';
+  private apiUrl: string = 'http://localhost:8080/collexion';
   private refresh$: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public findAll(): Observable<CollexionDto[]> {
     return this.refresh$.pipe(
-      // permet de transformer un flux / manipuler un flux
-      // Forcer un premier chargement
       startWith(null),
 
-      // Transformer le "void" que CollexionDto[] en allant chercher les informations
       switchMap(() => {
         return this.http.get<CollexionDto[]>(this.apiUrl);
       })
@@ -26,7 +23,7 @@ export class CollexionService {
   }
 
   public refresh() {
-    this.refresh$.next(); // Permet d'envoyer des nouvelles infos
+    this.refresh$.next();
   }
 
   public findById(id: number): Observable<CollexionDto> {

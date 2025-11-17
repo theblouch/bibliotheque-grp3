@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { MatiereDto } from '../dto/editeur';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { EditeurDto } from '../dto/editeur-dto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Editeur {
-  private apiUrl: string = '/editeur';
+export class EditeurService {
+  private apiUrl: string = 'http://localhost:8080/editeur';
   private refresh$: Subject<void> = new Subject<void>();
-  
+
   constructor(private http: HttpClient) { }
 
   public findAll(): Observable<EditeurDto[]> {
-    return this.refresh$.pipe( // permet de transformer un flux / manipuler un flux
-      // Forcer un premier chargement
+    return this.refresh$.pipe(
       startWith(null),
 
-      // Transformer le "void" que MatiereDto[] en allant chercher les informations
       switchMap(() => {
         return this.http.get<EditeurDto[]>(this.apiUrl);
       })
@@ -25,14 +23,14 @@ export class Editeur {
   }
 
   public refresh() {
-    this.refresh$.next(); // Permet d'envoyer des nouvelles infos
+    this.refresh$.next();
   }
 
   public findById(id: number): Observable<EditeurDto> {
-    return this.http.get<EditeurDto>(`${ this.apiUrl }/${ id }`);
+    return this.http.get<EditeurDto>(`${this.apiUrl}/${id}`);
   }
 
-   public save(editeurDto: EditeurDto): void {
+  public save(editeurDto: EditeurDto): void {
     const payload = editeurDto.toJson();
 
     if (!editeurDto.id) {
@@ -40,11 +38,11 @@ export class Editeur {
     }
 
     else {
-      this.http.put<EditeurDto>(`${ this.apiUrl }/${ editeurDto.id }`, payload).subscribe(() => this.refresh());
+      this.http.put<EditeurDto>(`${this.apiUrl}/${editeurDto.id}`, payload).subscribe(() => this.refresh());
     }
   }
 
   public deleteById(id: number): void {
-    this.http.delete<void>(`${ this.apiUrl }/${ id }`).subscribe(() => this.refresh());
+    this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => this.refresh());
   }
 }

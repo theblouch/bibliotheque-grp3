@@ -2,19 +2,27 @@
 
 <form (ngSubmit)="creerOuModifier()" [formGroup]="editeurForm">
     <div>
-        <input type="text" formControlName="label" />
+        <input type="text" formControlName="nom" />
 
-        @if (labelCtrl.hasError('required')) {
-            <span>Le libellé est obligatoire</span>
+        @if (nomCtrl.hasError('required')) {
+        <span>Le nom est obligatoire</span>
+        }
+    </div>
+
+    <div>
+        <input type="text" formControlName="pays" />
+
+        @if (paysCtrl.hasError('required')) {
+        <span>Le pays est obligatoire</span>
         }
     </div>
 
     @if (editingEditeur) {
-        <input type="submit" [disabled]="editeurForm.invalid" value="Modifier" />
+    <input type="submit" [disabled]="editeurForm.invalid" value="Modifier" />
     }
 
     @else {
-        <input type="submit" [disabled]="editeurForm.invalid" value="Créer" />
+    <input type="submit" [disabled]="editeurForm.invalid" value="Créer" />
     }
 </form>
 

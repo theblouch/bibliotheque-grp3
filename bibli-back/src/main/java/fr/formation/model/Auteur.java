@@ -23,14 +23,17 @@ public class Auteur {
     @Column(length = 50, nullable = false)
     private String nationalite;
 
-    @OneToMany (mappedBy="auteur")
-	private List<Livre> livres;
+    @OneToMany(mappedBy = "auteur")
+    private List<Livre> livres;
 
     public Auteur(Integer id, String nom, String prenom, String nationalite) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.nationalite = nationalite;
+    }
+
+    public Auteur() {
     }
 
     public Integer getId() {

@@ -52,11 +52,15 @@ export class AuteurPage implements OnInit {
 
     this.editingAuteur = null;
     this.nomCtrl.setValue("");
+    this.prenomCtrl.setValue("");
+    this.nationaliteCtrl.setValue("");
   }
 
   public editer(auteur: AuteurDto) {
     this.editingAuteur = auteur;
     this.nomCtrl.setValue(auteur.nom);
+    this.prenomCtrl.setValue(auteur.prenom);
+    this.nationaliteCtrl.setValue(auteur.nationalite);
   }
 
   public supprimer(auteur: AuteurDto) {
