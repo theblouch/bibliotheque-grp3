@@ -1,0 +1,41 @@
+<h1>Liste des collections</h1>
+
+<form (ngSubmit)="creerOuModifier()" [formGroup]="collexionForm">
+  <div>
+    <input type="text" formControlName="nom" />
+
+    @if (nomCtrl.hasError('required')) {
+    <span>Le libellé est obligatoire</span>
+    }
+  </div>
+
+  @if (editingCollexion) {
+  <input type="submit" [disabled]="collexionForm.invalid" value="Modifier" />
+  } @else {
+  <input type="submit" [disabled]="collexionForm.invalid" value="Créer" />
+  }
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>Libellé</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let collexion of collexions$ | async; trackBy: trackCollexion">
+      <td>
+        <a [routerLink]="['/collexion', collexion.id]">{{ collexion.nom }}</a>
+      </td>
+
+      <td>
+        <button (click)="editer(collexion)">Modifier</button>
+        <button (click)="supprimer(collexion)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
